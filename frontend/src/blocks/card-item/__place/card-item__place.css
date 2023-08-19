@@ -1,0 +1,11 @@
+.card-item__place {
+    margin: 0;
+    font-size: 24px;
+    font-weight: 900;
+    line-height: 29px;
+    color: black;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    max-width: 210px;
+}

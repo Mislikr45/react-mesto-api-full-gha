@@ -1,0 +1,10 @@
+.window__sign {
+    text-align: center;
+    margin-top: 60px;
+}
+
+@media screen and (max-width: 880px) {
+    .window__sign {
+        margin-top: 50px;
+    }
+  }

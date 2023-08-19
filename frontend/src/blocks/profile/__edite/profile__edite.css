@@ -1,0 +1,23 @@
+.profile__edite {
+    width: 24px;
+    height: 24px;
+    background-image: url(../../../images/pencel.svg);
+    background-repeat: no-repeat;
+    background-position: center;
+    align-self: center;
+    cursor: pointer;
+    background-color: #000;
+    border: white 1px solid;
+    padding: 0;
+}
+
+.profile__edite:hover {
+  opacity: 0.6;
+}
+
+@media screen and (max-width: 880px) {
+  .profile__edite {
+    width: 18px;
+    height: 18px;
+  }
+}

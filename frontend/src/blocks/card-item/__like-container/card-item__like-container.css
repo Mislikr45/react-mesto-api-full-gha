@@ -1,0 +1,5 @@
+.card-item__like-container {
+    color:black;
+    display:flex;
+    flex-direction: column;
+}

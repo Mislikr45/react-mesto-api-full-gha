@@ -1,0 +1,16 @@
+.card-item__like {
+  height: 19px;
+  width: 22px;
+  background-color: white;
+  background-image: url(../../../images/like.svg);
+  background-repeat: no-repeat;
+  margin-top: 4px;
+  margin-right: 1px;
+  padding: 0;
+  border: 0;
+  cursor: pointer;
+}
+
+.card-item__like:hover {
+  opacity: 0.5;
+}

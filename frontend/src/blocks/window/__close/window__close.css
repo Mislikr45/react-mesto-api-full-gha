@@ -1,0 +1,27 @@
+.window__close {
+    position: absolute;
+    background-image: url(../../../images/Close-Icon.svg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    right: -40px;
+    top: -40px;
+    width: 32px;
+    height: 32px;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    background-color: rgba(255, 255, 255, 0);
+}
+
+.window__close:hover {
+  opacity: 0.6;
+}
+
+@media screen and (max-width: 880px) {
+  .window__close {
+    width: 20px;
+    height: 20px;
+    top:-36px;
+    right: 0px;
+  }
+}
