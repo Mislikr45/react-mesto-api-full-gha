@@ -12,14 +12,24 @@ const NotFoundError = require('./errors/NotFoundError');
 const auth = require('./middlewares/auth');
 const { URL_REGEX } = require('./utils/constants');
 
-const { PORT = 3000 } = process.env;
+const { PORT = 3000, DB_URL = 'mongodb://127.0.0.1:27017/mestodb' } = process.env;
 
 const app = express();
 
 app.use(express.json());
 app.use(cookies());
 app.use(express.json({ extended: true }));
-app.use(cors());
+app.use(cors({
+  origin: ['http://localhost:3001'],
+  credentials: true,
+  methods: ['GET', 'PUT', 'POST', 'DELETE', 'PATCH'],
+}));
+
+app.get('/crash-test', () => {
+  setTimeout(() => {
+    throw new Error('Сервер сейчас упадёт');
+  }, 0);
+});
 
 mongoose.connect(
   'mongodb://0.0.0.0:27017/mestodb',

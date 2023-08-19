@@ -1,0 +1,6 @@
+
+#  15 контрольная работа  deploy на сервер
+
+IP  51.250.78.192
+Frontend  https://...
+Backend  https://...

@@ -15,7 +15,7 @@ module.exports.createCard = (req, res, next) => {
   const id = req.user._id;
   const { name, link } = req.body;
   Card.create({ name, link, owner: id })
-    .then((card) => res.status(201).send({ data: card }))
+    .then((card) => res.status(201).send(card)) // ОК
     .catch((error) => {
       if (error.name === 'ValidationError') {
         return next(
@@ -71,7 +71,7 @@ module.exports.addLikeCard = (req, res, next) => {
           'Передан несуществующий _id карточки',
         ));
       }
-      return res.send({ data: card });
+      return res.send(card);
     })
     .catch((err) => {
       if (err.name === 'ValidationError' || err.name === 'CastError') {
@@ -95,7 +95,7 @@ module.exports.deleteLikeCard = (req, res, next) => {
           'Передан несуществующий _id карточки',
         ));
       }
-      return res.send({ data: card });
+      return res.send({data:card});
     })
     .catch((err) => {
       if (err.name === 'ValidationError' || err.name === 'CastError') {
