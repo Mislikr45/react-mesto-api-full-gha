@@ -1,4 +1,4 @@
-export const BASE_URL = 'http://api.mislikr45.nomoreparties.co';
+export const BASE_URL = 'https://api.mislikr45.nomoreparties.co';
 
 function checkResponse(res) { 
 
