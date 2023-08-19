@@ -1,4 +1,4 @@
-export const BASE_URL = 'http://localhost:3000';
+export const BASE_URL = 'http://api.mislikr45.nomoreparties.co';
 
 function checkResponse(res) { 
 

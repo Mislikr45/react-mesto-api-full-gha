@@ -87,7 +87,7 @@ export default class Api {
 }
 
 export const api = new Api({
-  url: "http://localhost:3000",
+  url: "http://api.mislikr45.nomoreparties.co",
   headers: {
     Authorization : `Bearer ${localStorage.getItem("token")}`,
     "Content-Type": "application/json",
