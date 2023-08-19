@@ -20,7 +20,7 @@ app.use(express.json());
 app.use(cookies());
 app.use(express.json({ extended: true }));
 app.use(cors({
-  origin: ['http://localhost:3001'],
+  origin: ['http://localhost:3001', "https://mislikr45.nomoreparties.co/sign-in"],
   credentials: true,
   methods: ['GET', 'PUT', 'POST', 'DELETE', 'PATCH'],
 }));
