@@ -31,7 +31,6 @@ return data})
 
 
 export function authorize( {email, password} ) {
-  console.log({email, password});
 	return fetch(`${BASE_URL}/signin`, {
 		method: 'POST',
 		headers: {
@@ -55,6 +54,7 @@ export function authorize( {email, password} ) {
 
 export function checkToken() {
    const token = localStorage.getItem('token')
+   console.log(token);
   return fetch(`${BASE_URL}/users/me`, {
     method: 'GET',
     headers: {
