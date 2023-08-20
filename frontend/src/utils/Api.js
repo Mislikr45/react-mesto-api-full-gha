@@ -78,7 +78,7 @@ export default class Api {
   
 
 
-deketeLike(cardId) {
+deleteLike(cardId) {
     return fetch(`${this._baseUrl}/cards/${cardId}/likes`, {
       method: "DELETE",
       headers: this._headers,
