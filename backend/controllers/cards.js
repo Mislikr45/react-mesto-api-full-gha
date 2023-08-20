@@ -95,7 +95,7 @@ module.exports.deleteLikeCard = (req, res, next) => {
           'Передан несуществующий _id карточки',
         ));
       }
-      return res.send({data:card});
+      return res.send({ data: card });
     })
     .catch((err) => {
       if (err.name === 'ValidationError' || err.name === 'CastError') {

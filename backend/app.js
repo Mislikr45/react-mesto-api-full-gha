@@ -2,7 +2,7 @@ const express = require('express');
 const cookies = require('cookie-parser');
 require('dotenv').config();
 const cors = require('cors');
-var helmet = require('helmet');
+const helmet = require('helmet');
 const mongoose = require('mongoose');
 const { celebrate, Joi, errors } = require('celebrate');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
@@ -13,25 +13,23 @@ const errorHandler = require('./middlewares/errorHandler');
 const NotFoundError = require('./errors/NotFoundError');
 const auth = require('./middlewares/auth');
 const { URL_REGEX } = require('./utils/constants');
-const limiter = require('./middlewares/rateLimiter.js');
+const limiter = require('./middlewares/rateLimiter');
 
-const { PORT = 3000, DB_URL = 'mongodb://127.0.0.1:27017/mestodb' } = process.env;
+const { PORT = 3000 } = process.env;
 
 const app = express();
 app.use(express.json());
 app.use(cookies());
 app.use(express.json({ extended: true }));
 app.use(cors({
-  origin:["https://mislikr45.nomoreparties.co", "http://mislikr45.nomoreparties.co",
-  "http://localhost:3000", "http://localhost:3001",],
+  origin: ['https://mislikr45.nomoreparties.co', 'http://mislikr45.nomoreparties.co',
+    'http://localhost:3000', 'http://localhost:3001'],
   credentials: true,
   methods: ['GET', 'PUT', 'POST', 'DELETE', 'PATCH'],
 }));
 
 app.use(helmet());
 app.disable('x-powered-by');
-
-
 
 app.get('/crash-test', () => {
   setTimeout(() => {
