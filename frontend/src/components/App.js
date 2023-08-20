@@ -59,6 +59,19 @@ function App() {
         })
     }
   }, [navigate])
+  //   useEffect(() => {
+  //   handleTokenCheck()}, [navigate]);
+
+  // const handleTokenCheck = () => {
+  //   if (localStorage.getItem("jwt")) {
+  //     const jwt = localStorage.getItem("jwt");      
+  //     auth.checkToken(jwt).then((res) => {
+  //       setUser({email:res.email});         
+  //         setLoggedIn(true);          
+  //         navigate("/main", { replace: true });        
+  //     });
+  //   }
+  // };
 
   React.useEffect(() => {
     Promise.all([api.getUserInfo(), api.getCardInfo()])
