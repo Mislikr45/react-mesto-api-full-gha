@@ -40,8 +40,17 @@ function App() {
   const [useLocation, setUseLocation]=useState({pathname:""})
   const [user, setUser] = useState({email: ""});
 
-  useEffect(() => {
-    handleTokenCheck()}, []);
+
+  useEffect(() => {if (localStorage.getItem("jwt")) {
+    const jwt = localStorage.getItem("jwt");      
+    auth.checkToken(jwt).then((res) => {
+      setUser({email:res.email});
+      if (res) {
+        setLoggedIn(true);          
+        navigate("/main", { replace: true });
+      }
+    });
+  }}, [navigate]);
 
 
   useEffect(() => {
@@ -175,19 +184,18 @@ function App() {
       })
   };
 
-
-  const handleTokenCheck = () => {
-    if (localStorage.getItem("jwt")) {
-      const jwt = localStorage.getItem("jwt");      
-      auth.checkToken(jwt).then((res) => {
-        setUser({email:res.email});
-        if (res) {
-          setLoggedIn(true);          
-          navigate("/main", { replace: true });
-        }
-      });
-    }
-  };
+  // const handleTokenCheck = () => {
+  //   if (localStorage.getItem("jwt")) {
+  //     const jwt = localStorage.getItem("jwt");      
+  //     auth.checkToken(jwt).then((res) => {
+  //       setUser({email:res.email});
+  //       if (res) {
+  //         setLoggedIn(true);          
+  //         navigate("/main", { replace: true });
+  //       }
+  //     });
+  //   }
+  // };
 
   function handleRegister(email, password) {
     auth
