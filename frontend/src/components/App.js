@@ -44,36 +44,36 @@ function App() {
     if (localStorage.getItem('jwt')) {
       const jwt = localStorage.getItem('jwt');
 
-      auth
-        .checkToken(jwt)
-        .then((res) => {
-          setLoggedIn(true)
-          setUser(res.email)
-          navigate("/", { replace: true })
-        })
-        .catch((err) => {
-          if (err.status === 401) {
-            console.log("401 — Токен не передан или передан не в том формате")
-          }
-          console.log("401 — Переданный токен некорректен")
-        })
+    //   auth
+    //     .checkToken(jwt)
+    //     .then((res) => {
+    //       setLoggedIn(true)
+    //       setUser(res.email)
+    //       navigate("/", { replace: true })
+    //     })
+    //     .catch((err) => {
+    //       if (err.status === 401) {
+    //         console.log("401 — Токен не передан или передан не в том формате")
+    //       }
+    //       console.log("401 — Переданный токен некорректен")
+    //     })
+    // }
+  // }, [navigate])
+    useEffect(() => {
+    handleTokenCheck()}, [navigate]);
+
+  const handleTokenCheck = () => {
+    if (localStorage.getItem("jwt")) {
+      const jwt = localStorage.getItem("jwt");      
+      auth.checkToken(jwt).then((res) => {
+        setUser({email:res.email});         
+          setLoggedIn(true);          
+          navigate("/main", { replace: true });        
+      });
     }
-  }, [navigate])
-  //   useEffect(() => {
-  //   handleTokenCheck()}, [navigate]);
+  };
 
-  // const handleTokenCheck = () => {
-  //   if (localStorage.getItem("jwt")) {
-  //     const jwt = localStorage.getItem("jwt");      
-  //     auth.checkToken(jwt).then((res) => {
-  //       setUser({email:res.email});         
-  //         setLoggedIn(true);          
-  //         navigate("/main", { replace: true });        
-  //     });
-  //   }
-  // };
-
-  React.useEffect(() => {
+  useEffect(() => {
     Promise.all([api.getUserInfo(), api.getCardInfo()])
       .then(([userProfile, cards]) => {
         setCurrentUser(userProfile);
