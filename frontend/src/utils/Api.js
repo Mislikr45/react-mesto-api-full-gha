@@ -1,4 +1,3 @@
-import { json } from "react-router-dom";
 
 export default class Api {
   constructor({ url, headers }) {
@@ -69,21 +68,23 @@ export default class Api {
     }).then(this._checkResponse);
   }
 
-  toggleLike(cardId, isLiked) {
-    if (!isLiked) {
-      return fetch(`${this._baseUrl}/cards/${cardId}/likes`, {
+  addLike(cardId) {
+     return fetch(`${this._baseUrl}/cards/${cardId}/likes`, {
         method: "PUT",
         headers: this._headers,
       })
       .then(this._checkResponse);
-    } else {
-      return fetch(`${this._baseUrl}/cards/${cardId}/likes`, {
-        method: "DELETE",
-        headers: this._headers,
-      })
-      .then(this._checkResponse);
     }
-  }
+  
+
+
+deketeLike(cardId) {
+    return fetch(`${this._baseUrl}/cards/${cardId}/likes`, {
+      method: "DELETE",
+      headers: this._headers,
+    })
+    .then(this._checkResponse);
+}
 }
 
 export const api = new Api({

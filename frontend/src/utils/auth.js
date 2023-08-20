@@ -1,15 +1,10 @@
 export const BASE_URL = 'https://api.mislikr45.nomoreparties.co';
 
 function checkResponse(res) { 
-
   if (!res.ok) { 
-
     return Promise.reject(`Ошибка: ${res.status}`); 
-
   } 
-
   return res.json(); 
-
 };
 
 export function register({email, password})  {
