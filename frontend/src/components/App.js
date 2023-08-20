@@ -49,8 +49,8 @@ function App() {
         setLoggedIn(true);          
         navigate("/main", { replace: true });
       }
-    });
-  }}, [navigate]);
+    }).catch((error) => console.log(`Ошибка: ${error}`));
+  }}, [ ]);
 
 
   useEffect(() => {
