@@ -18,7 +18,6 @@ const limiter = require('./middlewares/rateLimiter.js');
 const { PORT = 3000, DB_URL = 'mongodb://127.0.0.1:27017/mestodb' } = process.env;
 
 const app = express();
-
 app.use(express.json());
 app.use(cookies());
 app.use(express.json({ extended: true }));
