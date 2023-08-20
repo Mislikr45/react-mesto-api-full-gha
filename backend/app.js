@@ -1,6 +1,8 @@
 const express = require('express');
 const cookies = require('cookie-parser');
+require('dotenv').config();
 const cors = require('cors');
+var helmet = require('helmet');
 const mongoose = require('mongoose');
 const { celebrate, Joi, errors } = require('celebrate');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
@@ -11,6 +13,7 @@ const errorHandler = require('./middlewares/errorHandler');
 const NotFoundError = require('./errors/NotFoundError');
 const auth = require('./middlewares/auth');
 const { URL_REGEX } = require('./utils/constants');
+const limiter = require('./middlewares/rateLimiter.js');
 
 const { PORT = 3000, DB_URL = 'mongodb://127.0.0.1:27017/mestodb' } = process.env;
 
@@ -25,6 +28,10 @@ app.use(cors({
   credentials: true,
   methods: ['GET', 'PUT', 'POST', 'DELETE', 'PATCH'],
 }));
+
+// app.use(helmet());
+
+
 
 app.get('/crash-test', () => {
   setTimeout(() => {
@@ -60,6 +67,8 @@ app.use(auth);
 
 app.use(routesUser);
 app.use(routerCards);
+
+app.use(limiter);
 
 app.use(errorLogger);
 

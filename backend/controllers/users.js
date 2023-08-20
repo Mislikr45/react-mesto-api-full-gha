@@ -1,7 +1,9 @@
 const jwt = require('jsonwebtoken');
-// const { validationResult } = require('express-validator');
 const bcrypt = require('bcryptjs');
 const User = require('../models/user');
+require('dotenv').config();
+
+const { NODE_ENV, JWT_SECRET } = process.env;
 
 // 400
 const BadRequestError = require('../errors/BadRequestError');
@@ -19,7 +21,7 @@ module.exports.login = (req, res, next) => {
   return User.findUserByCredentials(email, password)
     .then((user) => {
       const payload = { _id: user._id };
-      const token = jwt.sign(payload, 'super-strong-secret', { expiresIn: '7d' });
+      const token = jwt.sign(payload,  NODE_ENV === 'production' ? JWT_SECRET : 'dev-secret', { expiresIn: '7d' });
       // res.cookie('jwt', token);
       // res.send({ user, token });
       res.send({ jwt: token });
