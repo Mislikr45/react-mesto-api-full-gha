@@ -52,7 +52,6 @@ function Main({
             <Card
               card={card}
               key={card._id}
-              deleteCard={onDeleteCard}
               onCardClick={onCardClick}
               currentUser={currentUser}
               onCardLike={onCardLike}

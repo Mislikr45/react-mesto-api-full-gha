@@ -41,7 +41,26 @@ function App() {
   const [user, setUser] = useState({email: ""});
 
   React.useEffect(() => {
+    if (localStorage.getItem('jwt')) {
+      const jwt = localStorage.getItem('jwt');
 
+      auth
+        .checkToken(jwt)
+        .then((res) => {
+          setLoggedIn(true)
+          setUser(res.email)
+          navigate("/", { replace: true })
+        })
+        .catch((err) => {
+          if (err.status === 401) {
+            console.log("401 — Токен не передан или передан не в том формате")
+          }
+          console.log("401 — Переданный токен некорректен")
+        })
+    }
+  }, [navigate])
+
+  React.useEffect(() => {
     Promise.all([api.getUserInfo(), api.getCardInfo()])
       .then(([userProfile, cards]) => {
         setCurrentUser(userProfile);
@@ -172,21 +191,21 @@ function App() {
       })
   };
 
-  useEffect(() => {
-    handleTokenCheck()}, []);
+  // useEffect(() => {
+  //   handleTokenCheck()}, []);
 
-  const handleTokenCheck = () => {
-    if (localStorage.getItem("jwt")) {
-      const jwt = localStorage.getItem("jwt");      
-      auth.checkToken(jwt).then((res) => {
-        setUser({email:res.email});
-        if (res) {
-          setLoggedIn(true);          
-          navigate("/main", { replace: true });
-        }
-      });
-    }
-  };
+  // const handleTokenCheck = () => {
+  //   if (localStorage.getItem("jwt")) {
+  //     const jwt = localStorage.getItem("jwt");      
+  //     auth.checkToken(jwt).then((res) => {
+  //       setUser({email:res.email});
+  //       if (res) {
+  //         setLoggedIn(true);          
+  //         navigate("/main", { replace: true });
+  //       }
+  //     });
+  //   }
+  // };
 
   function handleRegister(email, password) {
     auth

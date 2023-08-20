@@ -2,7 +2,6 @@ import React from "react";
 
 function Card({
   card,
-  deleteCard,
   onCardClick,
   currentUser,
   onCardLike,
