@@ -107,7 +107,7 @@ function App() {
         )
         .catch((error) => console.log(`Ошибка: ${error}`))
     }
-
+  }
 
   function handleCardDelete(card) {
     //   // Отправляем запрос в API и получаем обновлённые данные карточки
