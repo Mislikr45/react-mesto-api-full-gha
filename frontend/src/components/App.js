@@ -59,19 +59,19 @@ function App() {
     //     })
     // }
   // }, [navigate])
-    useEffect(() => {
-    handleTokenCheck()}, []);
+  //   useEffect(() => {
+  //   handleTokenCheck()}, []);
 
-  const handleTokenCheck = () => {
-    if (localStorage.getItem("jwt")) {
-      const jwt = localStorage.getItem("jwt");      
-      auth.checkToken(jwt).then((res) => {
-        setUser({email:res.email});         
-          setLoggedIn(true);          
-          navigate("/main", { replace: true });        
-      });
-    }
-  };
+  // const handleTokenCheck = () => {
+  //   if (localStorage.getItem("jwt")) {
+  //     const jwt = localStorage.getItem("jwt");      
+  //     auth.checkToken(jwt).then((res) => {
+  //       setUser({email:res.email});         
+  //         setLoggedIn(true);          
+  //         navigate("/main", { replace: true });        
+  //     });
+  //   }
+  // };
 
   useEffect(() => {
     Promise.all([api.getUserInfo(), api.getCardInfo()])
@@ -204,21 +204,21 @@ function App() {
       })
   };
 
-  // useEffect(() => {
-  //   handleTokenCheck()}, []);
+  useEffect(() => {
+    handleTokenCheck()}, []);
 
-  // const handleTokenCheck = () => {
-  //   if (localStorage.getItem("jwt")) {
-  //     const jwt = localStorage.getItem("jwt");      
-  //     auth.checkToken(jwt).then((res) => {
-  //       setUser({email:res.email});
-  //       if (res) {
-  //         setLoggedIn(true);          
-  //         navigate("/main", { replace: true });
-  //       }
-  //     });
-  //   }
-  // };
+  const handleTokenCheck = () => {
+    if (localStorage.getItem("jwt")) {
+      const jwt = localStorage.getItem("jwt");      
+      auth.checkToken(jwt).then((res) => {
+        setUser({email:res.email});
+        if (res) {
+          setLoggedIn(true);          
+          navigate("/main", { replace: true });
+        }
+      });
+    }
+  };
 
   function handleRegister(email, password) {
     auth
