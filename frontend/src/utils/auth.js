@@ -31,6 +31,7 @@ return data})
 
 
 export function authorize( {email, password} ) {
+  console.log({email, password});
 	return fetch(`${BASE_URL}/signin`, {
 		method: 'POST',
 		headers: {
