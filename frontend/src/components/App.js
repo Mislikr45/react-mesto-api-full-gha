@@ -50,7 +50,8 @@ function App() {
         navigate("/main", { replace: true });
       }
     }).catch((error) => console.log(`Ошибка: ${error}`));
-  }}, [ ]);
+  } else {setLoggedIn(false);          
+    navigate("/main", { replace: false });}}, []);
 
 
   useEffect(() => {
