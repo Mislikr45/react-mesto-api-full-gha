@@ -22,14 +22,15 @@ const app = express();
 app.use(express.json());
 app.use(cookies());
 app.use(express.json({ extended: true }));
-// app.use(cors({
-//   origin: ["https://mislikr45.nomoreparties.co/sign-in", "http://mislikr45.nomoreparties.co/sign-in",
-//   "http://localhost:3000", "http://localhost:3001",],
-//   credentials: true,
-//   methods: ['GET', 'PUT', 'POST', 'DELETE', 'PATCH'],
-// }));
+app.use(cors({
+  origin: ["https://mislikr45.nomoreparties.co/sign-in", "http://mislikr45.nomoreparties.co/sign-in",
+  "http://localhost:3000", "http://localhost:3001",],
+  credentials: true,
+  methods: ['GET', 'PUT', 'POST', 'DELETE', 'PATCH'],
+}));
 
-// app.use(helmet());
+app.use(helmet());
+app.disable('x-powered-by');
 
 
 
