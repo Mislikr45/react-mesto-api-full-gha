@@ -40,9 +40,9 @@ function App() {
   const [useLocation, setUseLocation]=useState({pathname:""})
   const [user, setUser] = useState({email: ""});
 
-  React.useEffect(() => {
-    if (localStorage.getItem('jwt')) {
-      const jwt = localStorage.getItem('jwt');
+  // React.useEffect(() => {
+  //   if (localStorage.getItem('jwt')) {
+  //     const jwt = localStorage.getItem('jwt');
 
     //   auth
     //     .checkToken(jwt)
