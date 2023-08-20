@@ -40,20 +40,6 @@ function App() {
   const [useLocation, setUseLocation]=useState({pathname:""})
   const [user, setUser] = useState({email: ""});
 
-
-  useEffect(() => {if (localStorage.getItem("jwt")) {
-    const jwt = localStorage.getItem("jwt");      
-    auth.checkToken(jwt).then((res) => {
-      setUser({email:res.email});
-      if (res) {
-        setLoggedIn(true);          
-        navigate("/main", { replace: true });
-      }
-    }).catch((error) => console.log(`Ошибка: ${error}`));
-  } else {setLoggedIn(false);          
-    navigate("/main", { replace: false });}}, []);
-
-
   useEffect(() => {
     Promise.all([api.getUserInfo(), api.getCardInfo()])
       .then(([userProfile, cards]) => {
@@ -101,7 +87,7 @@ function App() {
   function handleCardLike(card) {
     // Снова проверяем, есть ли уже лайк на этой карточке
     const isLiked = card.likes.some((i) => i._id === currentUser._id);
-    if (isLiked) {
+    if (isLiked) { console.log("del");
       api
         .deleteLike(card._id)
         .then((newCard) =>
@@ -110,7 +96,7 @@ function App() {
           )
         )
         .catch((error) => console.log(`Ошибка: ${error}`))
-    } else {
+    } else { console.log("add");
       api
         .addLike(card._id)
         .then((newCard) =>
@@ -185,18 +171,21 @@ function App() {
       })
   };
 
-  // const handleTokenCheck = () => {
-  //   if (localStorage.getItem("jwt")) {
-  //     const jwt = localStorage.getItem("jwt");      
-  //     auth.checkToken(jwt).then((res) => {
-  //       setUser({email:res.email});
-  //       if (res) {
-  //         setLoggedIn(true);          
-  //         navigate("/main", { replace: true });
-  //       }
-  //     });
-  //   }
-  // };
+  useEffect(() => {
+    handleTokenCheck()}, []);
+
+  const handleTokenCheck = () => {
+    if (localStorage.getItem("jwt")) {
+      const jwt = localStorage.getItem("jwt");      
+      auth.checkToken(jwt).then((res) => {
+        setUser({email:res.email});
+        if (res) {
+          setLoggedIn(true);          
+          navigate("/main", { replace: true });
+        }
+      });
+    }
+  };
 
   function handleRegister(email, password) {
     auth
