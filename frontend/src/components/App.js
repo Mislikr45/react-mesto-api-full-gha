@@ -65,10 +65,7 @@ function App() {
         setCards(cards);
       })
       .catch((error) => console.log(`Ошибка: ${error}`));
-  }, [navigate]);
-
-
- 
+  }, [navigate]); 
 
   // Открытие попапов 
 
@@ -107,9 +104,6 @@ function App() {
     setCheckRegister(false); 
     setSelectedCard({ name: "", link: "" });
   } 
-
- 
-
   
   function handleCardLike(card) {
     // Снова проверяем, есть ли уже лайк на этой карточке
@@ -133,11 +127,8 @@ function App() {
             state.map((item) => (item._id === card._id ? newCard : item))
           )
         )
-        .catch((error) => console.log(`Ошибка: ${error}`))
-    
-  }
-
- 
+        .catch((error) => console.log(`Ошибка: ${error}`))    
+  } 
 
   function handleCardDelete(card) { 
     //   // Отправляем запрос в API и получаем обновлённые данные карточки 
