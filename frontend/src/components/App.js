@@ -112,20 +112,20 @@ function App() {
     if (isLiked) { console.log("del", isLiked);
       api
         .deletleLike(card._id)
-        .then((newCard) =>   
-          setCards((state) =>
-            state.map((item) => (item === card._id ? newCard : item))
-          )
-        )
+        .then((newCard) =>  console.log('del'))  
+          // setCards((state) =>
+          //   state.map((item) => (item === card._id ? newCard : item))
+          // )
+           
         .catch((error) => console.log(`Ошибка: ${error}`))
     } else {console.log("add", isLiked);
       api
         .toggleLike(card._id)
-        .then((newCard) =>
-          setCards((state) =>
-            state.map((item) => (item._id === card._id ? newCard : item))
-          )
-        )
+        .then((newCard) =>  console.log('add')) 
+        //   setCards((state) =>
+        //     state.map((item) => (item._id === card._id ? newCard : item))
+        //   )
+        // )
         .catch((error) => console.log(`Ошибка: ${error}`))}    
   } 
 
