@@ -98,7 +98,7 @@ function App() {
           )
         )
         .catch((error) => console.log(`Ошибка: ${error}`))
-    } else { console.log("add", isLiked, currentUser._id);
+    }   console.log("add", isLiked, currentUser._id);
       api
         .addLike(card._id)
         .then((newCard) =>
@@ -107,7 +107,7 @@ function App() {
           )
         )
         .catch((error) => console.log(`Ошибка: ${error}`))
-    }
+    
   }
 
   function handleCardDelete(card) {
