@@ -105,6 +105,7 @@ function App() {
   }
   React.useEffect(() => {
     handleCardLike()}, [setCards]);
+    
   function handleCardLike(card) {
     // Снова проверяем, есть ли уже лайк на этой карточке
     const isLiked = card.likes.some((i) => i === currentUser._id);
