@@ -9,12 +9,13 @@ function Card({
   onCardLike,
   onCardDelete,
 }) {
+  const isLiked = card.likes.some(i => i === currentUser._id);
   const [isActive, setIsActive] = React.useState(isLiked);
   // useEffect(() => {
   //   cardLikeButtonClassName}, []);
    
   const isOwn = card.owner === currentUser._id;
-  const isLiked = card.likes.some(i => i === currentUser._id);
+ 
   // const cardLikeButtonClassName = `card-item__like isLiked ? "card-item__like_selected" : ' '`;
   console.log(isLiked)
   let car;
