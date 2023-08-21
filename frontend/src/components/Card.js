@@ -10,7 +10,8 @@ function Card({
   onCardDelete,
 }) {
   const [isActive, setIsActive] = React.useState(false);
-
+  // useEffect(() => {
+  //   cardLikeButtonClassName}, []);
    
   const isOwn = card.owner === currentUser._id;
   const isLiked = card.likes.some(i => i === currentUser._id);
@@ -20,16 +21,15 @@ function Card({
   console.log(isLiked, currentUser._id)
 
   const cardLikeButtonClassName = `card-item__like ${
-    isLiked ? "card-item__like_selected" : ''
+    isActive ? "card-item__like_selected" : ''
   }`;
 
   function handleClick() {
-    setIsActive(!isActive);
     onCardClick(card);
-    console.log(setIsActive);
   }
   function handleLikeClick() {
     onCardLike(card);
+    setIsActive(!isActive)
    }
 
   function handleDeleteCard() {
