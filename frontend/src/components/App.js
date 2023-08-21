@@ -114,7 +114,7 @@ function App() {
         .deleteLike(card._id)
         .then((newCard) =>
           setCards((state) =>
-            state.map((item) => (item._id === card._id ? newCard : item))
+            state.map((item) => (item === card ? newCard : item))
           )
         )
         .catch((error) => console.log(`Ошибка: ${error}`))
