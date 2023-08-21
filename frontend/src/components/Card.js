@@ -40,7 +40,7 @@ function Card({
         <h2 className="card-item__title">{card.name}</h2>
         <div className="card-item__like-container">
           <button
-            // className={cardLikeButtonClassName}
+            className={'card-item__like'}
             type="button"
             aria-label="Лайк"
             onClick={handleLikeClick}
