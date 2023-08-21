@@ -9,7 +9,7 @@ function Card({
   onCardLike,
   onCardDelete,
 }) {
-  const [isActive, setIsActive] = React.useState(false);
+  const [isActive, setIsActive] = React.useState(isLiked);
   // useEffect(() => {
   //   cardLikeButtonClassName}, []);
    
