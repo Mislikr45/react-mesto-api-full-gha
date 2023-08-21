@@ -40,6 +40,25 @@ function App() {
   const [useLocation, setUseLocation]=useState({pathname:""})
   const [user, setUser] = useState({email: ""});
 
+
+
+
+  useEffect(() => {
+    handleTokenCheck()}, []);
+
+  const handleTokenCheck = () => {
+    if (localStorage.getItem("jwt")) {
+      const jwt = localStorage.getItem("jwt");      
+      auth.checkToken(jwt).then((res) => {
+        setUser({email:res.email});
+        if (res) {
+          setLoggedIn(true);          
+          navigate("/main", { replace: true });
+        }
+      });
+    }
+  };
+
   useEffect(() => {
     Promise.all([api.getUserInfo(), api.getCardInfo()])
       .then(([userProfile, cards]) => {
@@ -173,21 +192,6 @@ function App() {
       })
   };
 
-  useEffect(() => {
-    handleTokenCheck()}, []);
-
-  const handleTokenCheck = () => {
-    if (localStorage.getItem("jwt")) {
-      const jwt = localStorage.getItem("jwt");      
-      auth.checkToken(jwt).then((res) => {
-        setUser({email:res.email});
-        if (res) {
-          setLoggedIn(true);          
-          navigate("/main", { replace: true });
-        }
-      });
-    }
-  };
 
   function handleRegister(email, password) {
     auth
