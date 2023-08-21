@@ -66,6 +66,7 @@ function App() {
       })
       .catch((error) => console.log(`Ошибка: ${error}`));
   }, [navigate]); 
+  
   React.useEffect(() => {
     handleCardLike()}, [setCards]);
 
