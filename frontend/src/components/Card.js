@@ -16,7 +16,7 @@ function Card({
   const isLiked = card.likes.some(i => i === currentUser._id);
   const cardLikeButtonClassName = `card-item__like {isActive ? "card-item__like_selected" : ' '}`;
   const [isActive, setIsActive] = React.useState(isLiked);
-  console.log(setIsActive);
+  
   console.log(isLiked, currentUser._id)
   // function likeremadd() {
   // const cardLikeButtonClassName = `card-item__like ${
@@ -26,6 +26,7 @@ function Card({
   function handleClick() {
     setIsActive(!isActive);
     onCardClick(card);
+    console.log(cardLikeButtonClassName);
   }
   function handleLikeClick() {
     onCardLike(card);
