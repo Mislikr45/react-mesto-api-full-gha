@@ -7,7 +7,6 @@ function Main({
   onEditProfile,
   onAddPlace,
   onEditAvatar,
-  onDeleteCard,
   onCardClick,
   currentUser,
   cards,
