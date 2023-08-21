@@ -21,7 +21,7 @@ function Card({
   console.log(isLiked, currentUser._id)
 
   const cardLikeButtonClassName = `card-item__like ${
-    isActive ? "card-item__like_selected" : ''
+    isLiked ? "card-item__like_selected" : ''
   }`;
 
   function handleClick() {
