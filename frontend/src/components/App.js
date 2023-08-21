@@ -66,9 +66,9 @@ function App() {
       })
       .catch((error) => console.log(`Ошибка: ${error}`));
   }, [navigate]); 
-  
+
   React.useEffect(() => {
-    handleCardLike()}, [setCards]);
+    handleCardLike()}, [cards]);
 
   // Открытие попапов 
 
