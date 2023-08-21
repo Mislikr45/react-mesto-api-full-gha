@@ -42,32 +42,31 @@ function App() {
   const [useLocation, setUseLocation]=useState({pathname:""}) 
   const [user, setUser] = useState({email: ""});  
 
-  // Профиль 
-  useEffect(() => { 
-    api 
-      .getUserInfo() 
-      .then((userprofile) => { 
-        setCurrentUser(userprofile);       
-      }) 
-      .catch((err) => { 
-        console.log(err); 
-      }); 
-  }, []); 
+  React.useEffect(() => {
+    handleTokenCheck()}, [loggedIn]);
 
- 
+  const handleTokenCheck = () => {
+    if (localStorage.getItem("jwt")) {
+      const jwt = localStorage.getItem("jwt");      
+      auth.checkToken(jwt).then((res) => {
+        setUser({email:res.email});
+        if (res) {
+          setLoggedIn(true);          
+          navigate("/main", { replace: true });
+        }
+      });
+    }
+  };
 
-  // Карточки с сервера 
-
-  useEffect(() => { 
-    api 
-      .getCardInfo() 
-      .then((cards) => { 
+  React.useEffect(() => {
+    Promise.all([api.getUserInfo(), api.getCardInfo()])
+      .then(([userProfile, cards]) => {
+        setCurrentUser(userProfile);
         setCards(cards);
-      }) 
-      .catch((err) => { 
-        console.log(err); 
-      }); 
-  }, []); 
+      })
+      .catch((error) => console.log(`Ошибка: ${error}`));
+  }, [navigate]);
+
 
  
 
@@ -111,476 +110,243 @@ function App() {
 
  
 
-  function handleCardLike(card) { 
+  
+  function handleCardLike(card) {
+    // Снова проверяем, есть ли уже лайк на этой карточке
+    const isLiked = card.likes.some((i) => i === currentUser._id);
+    console.log( isLiked, currentUser._id);
+    if (isLiked) { console.log("del", isLiked, currentUser._id);
 
-    // Снова проверяем, есть ли уже лайк на этой карточке 
-
-    const isLiked = card.likes.some((i) => i._id === currentUser._id); 
-
- 
-
-    // Отправляем запрос в API и получаем обновлённые данные карточки 
-
-    api 
-
-      .toggleLike(card._id, isLiked) 
-
-      .then((newCard) => { 
-
-        setCards((state) => 
-
-          state.map((c) => (c._id === card._id ? newCard : c)) 
-
-        ); 
-
-      }) 
-
-      .catch((err) => { 
-
-        console.log(err); 
-
-      }); 
-
-  } 
+      api
+        .deleteLike(card._id)
+        .then((newCard) =>   
+          setCards((state) =>
+            state.map((item) => (item === card._id ? newCard : item))
+          )
+        )
+        .catch((error) => console.log(`Ошибка: ${error}`))
+    }   console.log("add", isLiked, currentUser._id);
+      api
+        .addLike(card._id)
+        .then((newCard) =>
+          setCards((state) =>
+            state.map((item) => (item._id === card._id ? newCard : item))
+          )
+        )
+        .catch((error) => console.log(`Ошибка: ${error}`))
+    
+  }
 
  
 
   function handleCardDelete(card) { 
-
     //   // Отправляем запрос в API и получаем обновлённые данные карточки 
-
     api 
-
       .deleteCard(card._id) 
-
       .then((item) => { 
-
         setCards((prevState) => 
-
           prevState.filter((item) => item._id !== card._id) 
-
         ); 
-
       }) 
-
       .catch((err) => { 
-
         console.log(err); 
-
       }); 
-
-  } 
-
- 
+  }  
 
   function handleUpdateUser(name, about) {  
-
     setIsloading(true) 
-
     api 
-
       .editeProfile(name, about) 
-
       .then((profile) => { 
-
         console.log(profile) 
-
-        setCurrentUser(profile); 
-
+        setCurrentUser(profile);
         closeAllPopups(); 
-
       }) 
-
       .catch((err) => { 
-
         console.log(err); 
-
       }) 
-
       .finally(()=> { 
-
         setIsloading(false) 
-
       }) 
-
   } 
 
  
 
-  function handleUpdateAvatar(avatar) { 
-
+  function handleUpdateAvatar(avatar) {
     setIsloading(true); 
-
     api 
-
       .editeAvatar(avatar) 
-
       .then((avatar) => { 
-
         setCurrentUser(avatar); 
-
         closeAllPopups(); 
-
       }) 
-
       .catch((err) => { 
-
         console.log(err); 
-
       })   
-
       .finally(()=> { 
-
         setIsloading(false) 
-
       }) 
-
   } 
 
  
 
   const handleAddCard = (value) => { 
-
     setIsloading(true) 
-
     api 
-
       .handleAddCardApi(value) 
-
       .then((newCard) => { 
-
-        setCards([newCard, ...cards]); 
-
-        closeAllPopups(); 
-
+        setCards([newCard, ...cards]);
+        closeAllPopups();
       }) 
-
       .catch((err) => { 
-
-        console.log(err); 
-
+        console.log(err);
       })   
-
       .finally(()=> { 
-
         setIsloading(false) 
-
       }) 
-
   }; 
 
- 
-
-  useEffect(() => { 
-
-    handleTokenCheck()}, []); 
-
- 
-
-  const handleTokenCheck = () => { 
-
-    if (localStorage.getItem("jwt")) { 
-
-      const jwt = localStorage.getItem("jwt");       
-
-      auth.checkToken(jwt).then((res) => { 
-
-        setUser({email:res.email}); 
-
-        if (res) { 
-
-          setLoggedIn(true);           
-
-          navigate("/main", { replace: true }); 
-
-        } 
-
-      }); 
-
-    } 
-
-  }; 
-
- 
-
-  function handleRegister(email, password) { 
-
+  function handleRegister(email, password) {
     auth 
-
-      .register( email, password ) 
-
+      .register( email, password )
       .then((res) => { 
-
         setParametrInfo({ 
-
           image: true, 
-
           subtitle: "Вы успешно зарегистрировались!", 
-
         }); 
-
         checkRegisterAdd(); 
-
         navigate("/sign-in", { replace: true }); 
-
       }) 
-
-       .catch((err) => {         
-
-        setParametrInfo({ 
-
+       .catch((err) => {
+        setParametrInfo({
           image: false, 
-
           subtitle: "Что-то пошло не так! Попробуйте еще раз", 
-
         }); 
-
-        checkRegisterAdd();        
-
+        checkRegisterAdd();
       }); 
-
   } 
 
  
 
   function handleSignOut() { 
-
-    localStorage.removeItem("jwt"); 
-
+    localStorage.removeItem("jwt");
     setLoggedIn(false); 
-
-    setUseLocation("/sign-in")  
-
+    setUseLocation("/sign-in") 
     navigate("/sign-in"); 
-
-  } 
-
- 
+  }  
 
   function handleAuthorization({ email, password }) { 
-
    auth 
-
       .authorize({ email, password }) 
-
-      .then((data) => {      
-
-        localStorage.setItem("jwt", data.token);    
-
-        setUser({email:email});  
-
-        setLoggedIn(true);              
-
-        navigate("/main");         
-
+      .then((data) => {
+        localStorage.setItem("jwt", data.token);
+        setUser({email:email});
+        setLoggedIn(true);
+        navigate("/main");
       }) 
-
       .catch((err) => { 
-
-        console.log(err);  
-
+        console.log(err); 
         setParametrInfo({ 
-
           image: false, 
-
           subtitle: "access denied!", 
-
         }); 
-
-        checkRegisterAdd();        
-
+        checkRegisterAdd();
       }); 
-
-  } 
-
- 
-
-   
+  }    
 
   return ( 
-
     <CurrentUserContext.Provider value={currentUser}> 
-
-      <div className="App"> 
-
+      <div className="App">
         <div className="page__container"> 
-
-          <Header handleSignOut={handleSignOut}  
-
+          <Header handleSignOut={handleSignOut}
           userEmail={user} 
-
           setUseLocation={setUseLocation} 
-
            /> 
-
           <Routes> 
-
             <Route 
-
               path="/" 
-
               element={ 
-
                 loggedIn ? ( 
-
                   <Navigate to="/main" /> 
-
                 ) : ( 
-
                   <Navigate to="/sign-in" replace /> 
-
                 ) 
-
               } 
-
-            /> 
-
- 
+            />  
 
             <Route 
-
               path="/sign-up" 
-
               element={<Register onRegister={handleRegister} />} 
-
             /> 
 
- 
-
             <Route 
-
               path="/sign-in" 
-
               element={ 
-
                 <Login 
-
-                  onLogin={handleAuthorization}                                  
-
+                  onLogin={handleAuthorization}
                 /> 
-
               } 
-
-            /> 
-
- 
+            />  
 
             <Route 
-
               path="/main" 
-
               element={ 
-
                 <ProtectedRouteElement 
-
                   element={Main} 
-
                   loggedIn={loggedIn} 
-
                   onEditProfile={handleEditProfileClick} 
-
-                  onAddPlace={handleAddPlaceClick} 
-
-                  onEditAvatar={handleEditAvatarClick} 
-
+                  onAddPlace={handleAddPlaceClick}
+                  onEditAvatar={handleEditAvatarClick}
                   onDeleteCard={handleDeleteCard} 
-
                   onCardClick={handleCardClick} 
-
                   currentUser={currentUser} 
-
                   cards={cards} 
-
                   onCardLike={handleCardLike} 
-
                   onCardDelete={handleCardDelete} 
-
                 /> 
-
               } 
-
             /> 
-
-          </Routes> 
-
- 
+          </Routes>  
 
           <EditProfilePopup 
-
             isOpen={isEditProfilePopupOpen} 
-
             onClose={closeAllPopups} 
-
             onUpdateUser={handleUpdateUser} 
-
             isLoading={isLoading} 
-
-          /> 
-
- 
+          />  
 
           <EditAvatarPopup 
-
             isOpen={isEditAvatarPopupOpen} 
-
             onClose={closeAllPopups} 
-
             onUpdateAvatar={handleUpdateAvatar} 
-
             isLoading={isLoading} 
-
           /> 
-
- 
 
           <AddPlacePopup 
-
             isOpen={isAddPlacePopupOpen} 
-
             onClose={closeAllPopups} 
-
             onUpdateCard={handleAddCard} 
-
             isLoading={isLoading} 
-
           /> 
 
  
 
-          <FormConfirmDeletCard 
-
-            isOpen={isTrashPopupOpen} 
-
+          <FormConfirmDeletCard
+            isOpen={isTrashPopupOpen}
             onClose={closeAllPopups} 
-
           /> 
 
- 
-
-          <ImagePopup onClose={closeAllPopups} card={selectedCard} /> 
-
- 
+          <ImagePopup onClose={closeAllPopups} card={selectedCard} />  
 
           <InfoTooltip 
-
-            isOpen={checkRegister} 
-
-            onClose={closeAllPopups} 
-
+            isOpen={checkRegister}
+            onClose={closeAllPopups}
             parametrInfo={parametrInfo} 
-
           /> 
-
         </div> 
-
       </div> 
-
     </CurrentUserContext.Provider> 
-
   ); 
-
-} 
-
- 
+}  
 
 export default App; 
