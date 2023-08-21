@@ -37,6 +37,7 @@ function App() {
     {image: "",
     subtitle: ""});
   const [isLoading, setIsloading] = useState(false);
+  const [like, setLike] = useState(false);
   const [useLocation, setUseLocation]=useState({pathname:""})
   const [user, setUser] = useState({email: ""});
 
@@ -108,16 +109,17 @@ function App() {
     const isLiked = card.likes.some((i) => i === currentUser._id);
     console.log( isLiked, currentUser._id);
     if (isLiked) { console.log("del", isLiked, currentUser._id);
-
+    setLike(isLiked); 
       api
         .deleteLike(card._id)
-        .then((newCard) =>   
+        .then((newCard) =>          
           setCards((state) =>
             state.map((item) => (item === card._id ? newCard : item))
           )
         )
         .catch((error) => console.log(`Ошибка: ${error}`))
     }   console.log("add", isLiked, currentUser._id);
+    setLike(isLiked); 
       api
         .addLike(card._id)
         .then((newCard) =>
@@ -282,6 +284,7 @@ function App() {
               element={
                 <ProtectedRouteElement
                   element={Main}
+                  like={like}
                   loggedIn={loggedIn}
                   onEditProfile={handleEditProfileClick}
                   onAddPlace={handleAddPlaceClick}
