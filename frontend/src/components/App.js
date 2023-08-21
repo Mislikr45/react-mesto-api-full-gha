@@ -43,7 +43,7 @@ function App() {
 
 
 
-  useEffect(() => {
+  React.useEffect(() => {
     handleTokenCheck()}, []);
 
   const handleTokenCheck = () => {
@@ -59,7 +59,7 @@ function App() {
     }
   };
 
-  useEffect(() => {
+  React.useEffect(() => {
     Promise.all([api.getUserInfo(), api.getCardInfo()])
       .then(([userProfile, cards]) => {
         setCurrentUser(userProfile);
