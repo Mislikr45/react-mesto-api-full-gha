@@ -59,7 +59,7 @@ function App() {
     }
   };
 
-  useEffect(() => {
+  React.useEffect(() => {
     loggedIn && Promise.all([api.getUserInfo(), api.getCardInfo()])
     .then(([userProfile, cards]) => {
       setCurrentUser(userProfile);
