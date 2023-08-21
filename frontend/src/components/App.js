@@ -44,7 +44,7 @@ function App() {
 
 
   React.useEffect(() => {
-    handleTokenCheck()}, []);
+    handleTokenCheck()}, [loggedIn]);
 
   const handleTokenCheck = () => {
     if (localStorage.getItem("jwt")) {
