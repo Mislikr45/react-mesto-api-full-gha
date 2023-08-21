@@ -14,14 +14,14 @@ function Card({
    
   const isOwn = card.owner === currentUser._id;
   const isLiked = card.likes.some(i => i === currentUser._id);
-  const cardLikeButtonClassName = `card-item__like {isLiked ? "card-item__like_selected" : ' '}`;
+  // const cardLikeButtonClassName = `card-item__like {isLiked ? "card-item__like_selected" : ' '}`;
   
   
   console.log(isLiked, currentUser._id)
 
-  // const cardLikeButtonClassName = `card-item__like ${
-  //   isLiked && "card-item__like_selected"
-  // }`;
+  const cardLikeButtonClassName = `card-item__like ${
+    isLiked && "card-item__like_selected"
+  }`;
 
   function handleClick() {
     setIsActive(!isActive);
