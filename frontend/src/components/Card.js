@@ -1,4 +1,6 @@
 import React from "react";
+import { useEffect, useState } from "react"; 
+
 
 function Card({
   card,
@@ -7,19 +9,26 @@ function Card({
   onCardLike,
   onCardDelete,
 }) {
+  const [isActive, setIsActive] = React.useState(isLiked);
+
+   
   const isOwn = card.owner === currentUser._id;
   const isLiked = card.likes.some(i => i === currentUser._id);
+  const cardLikeButtonClassName = `card-item__like {isActive ? "card-item__like_selected" : ' '}`;
+  
   console.log(isLiked, currentUser._id)
-  const cardLikeButtonClassName = `card-item__like ${
-    isLiked ? "card-item__like_selected" : ' ' 
-  }`;
+  // function likeremadd() {
+  // const cardLikeButtonClassName = `card-item__like ${
+  //   isLiked && "card-item__like_selected"
+  // }`;
 
   function handleClick() {
+    setIsActive(!isActive);
     onCardClick(card);
   }
   function handleLikeClick() {
     onCardLike(card);
-  }
+   }
 
   function handleDeleteCard() {
     onCardDelete(card);
