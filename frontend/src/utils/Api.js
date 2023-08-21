@@ -87,22 +87,22 @@ export default class Api {
 
  
 
-  toggleLike(cardId, isLiked) { 
-    if (!isLiked) { 
+  toggleLike(cardId, isLiked) {  
       return fetch(`${this._baseUrl}/cards/${cardId}/likes`, { 
         method: "PUT", 
         headers: this._headers, 
       }) 
-      .then(this._checkResponse); 
-    } else { 
+      .then(this._checkResponse);
+    }
+    
+    deletleLike(cardId, isLiked) {  
       return fetch(`${this._baseUrl}/cards/${cardId}/likes`, { 
         method: "DELETE", 
         headers: this._headers, 
       }) 
-      .then(this._checkResponse); 
-    } 
-  } 
-}  
+      .then(this._checkResponse);   
+    }  
+}
 
 export const api = new Api({ 
   url: "https://api.mislikr45.nomoreparties.co", 

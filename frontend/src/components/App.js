@@ -110,9 +110,8 @@ function App() {
     const isLiked = card.likes.some((i) => i === currentUser._id);
     console.log( isLiked, currentUser._id);
     if (isLiked) { console.log("del", isLiked, currentUser._id);
-
       api
-        .deleteLike(card._id)
+        .deletleLike(card._id)
         .then((newCard) =>   
           setCards((state) =>
             state.map((item) => (item === card._id ? newCard : item))
