@@ -117,7 +117,7 @@ function App() {
           )
         )
         .catch((error) => console.log(`Ошибка: ${error}`))
-    } console.log("add", isLiked);
+    } else {console.log("add", isLiked);
       api
         .toggleLike(card._id)
         .then((newCard) =>
@@ -125,7 +125,7 @@ function App() {
             state.map((item) => (item._id === card._id ? newCard : item))
           )
         )
-        .catch((error) => console.log(`Ошибка: ${error}`))    
+        .catch((error) => console.log(`Ошибка: ${error}`))}    
   } 
 
   function handleCardDelete(card) { 
