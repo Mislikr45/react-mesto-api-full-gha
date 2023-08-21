@@ -24,7 +24,7 @@ function Card({
   // }`;
 
   function handleClick() {
-    setIsActive(isLiked);
+    setIsActive(!isActive);
     onCardClick(card);
     console.log(setIsActive);
   }
