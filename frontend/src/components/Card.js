@@ -36,11 +36,11 @@ function Card({
         className="card-item__image"
         onClick={handleClick}
       />
-      <div className=<cardLikeButtonClassName>
+      <div className="card-item__data">
         <h2 className="card-item__title">{card.name}</h2>
         <div className="card-item__like-container">
           <button
-            className={'card-item__like'}
+            className={cardLikeButtonClassName} 
             type="button"
             aria-label="Лайк"
             onClick={handleLikeClick}
