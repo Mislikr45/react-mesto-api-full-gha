@@ -142,7 +142,6 @@ function App() {
         console.log(err); 
       }); 
   }  
-
   function handleUpdateUser(name, about) {  
     setIsloading(true) 
     api 
