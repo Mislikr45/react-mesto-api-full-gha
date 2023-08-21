@@ -9,19 +9,21 @@ function Card({
   onCardLike,
   onCardDelete,
 }) {
-  const [isActive, setIsActive] = React.useState(isLiked);
+  const [isActive, setIsActive] = React.useState(false);
   // useEffect(() => {
   //   cardLikeButtonClassName}, []);
    
   const isOwn = card.owner === currentUser._id;
   const isLiked = card.likes.some(i => i === currentUser._id);
   // const cardLikeButtonClassName = `card-item__like isLiked ? "card-item__like_selected" : ' '`;
-  
-  
+  console.log(isLiked)
+  let car;
   console.log(isLiked, currentUser._id)
-  let pp=isLiked;
+ function zalupa(isLiked) { if (isLiked) { car="666"; return car} else {car="666"; return car}
+
+ }
   const cardLikeButtonClassName = `${
-    pp ? "card-item__like card-item__like_selected" : 'card-item__like'
+    isActive ? "card-item__like card-item__like_selected" : 'card-item__like'
   }`;
 
   function handleClick() {
@@ -29,7 +31,6 @@ function Card({
   }
   function handleLikeClick() {
     onCardLike(card);
-     pp=!isLiked;
    }
 
   function handleDeleteCard() {
