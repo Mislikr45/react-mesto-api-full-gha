@@ -9,10 +9,10 @@ function Card({
 }) {
   const isOwn = card.owner === currentUser._id;
   const isLiked = card.likes.some(i => i === currentUser._id);
-  // console.log(isLiked)
-  // const cardLikeButtonClassName = `card-item__like ${
-  //   isLiked && "card-item__like_selected"
-  // }`;
+  console.log(isLiked)
+  const cardLikeButtonClassName = `card-item__like ${
+    isLiked && "card-item__like_selected"
+  }`;
 
   function handleClick() {
     onCardClick(card);
@@ -36,7 +36,7 @@ function Card({
         className="card-item__image"
         onClick={handleClick}
       />
-      <div className="card-item__data">
+      <div className=<cardLikeButtonClassName>
         <h2 className="card-item__title">{card.name}</h2>
         <div className="card-item__like-container">
           <button
