@@ -12,7 +12,6 @@ function Main({
   cards,
   onCardLike,
   onCardDelete,
-  like
 }) {
   return (
     <main className="content">
@@ -52,7 +51,6 @@ function Main({
             <Card
               card={card}
               key={card._id}
-              like={like}
               onCardClick={onCardClick}
               currentUser={currentUser}
               onCardLike={onCardLike}
