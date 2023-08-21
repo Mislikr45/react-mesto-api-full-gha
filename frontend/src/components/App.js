@@ -226,9 +226,12 @@ function App() {
       .authorize({ email, password })
       .then((data) => {     
         localStorage.setItem("jwt", data.token);   
+        handleTokenCheck()
         setUser({email:email}); 
+
         setLoggedIn(true);             
-        navigate("/main");        
+        navigate("/main"); 
+               
       })
       .catch((err) => {
         console.log(err); 
