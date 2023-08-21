@@ -11,18 +11,9 @@ function Card({
 }) {
   const isLiked = card.likes.some(i => i === currentUser._id);
   const [isActive, setIsActive] = React.useState(isLiked);
-  // useEffect(() => {
-  //   cardLikeButtonClassName}, []);
-   
+  
   const isOwn = card.owner === currentUser._id;
- 
-  // const cardLikeButtonClassName = `card-item__like isLiked ? "card-item__like_selected" : ' '`;
-  console.log(isLiked)
-  let car;
-  console.log(isLiked, currentUser._id)
- function zalupa(isLiked) { if (isLiked) { car="666"; return car} else {car="666"; return car}
 
- }
   const cardLikeButtonClassName = `${
     isActive ? "card-item__like card-item__like_selected" : 'card-item__like'
   }`;
