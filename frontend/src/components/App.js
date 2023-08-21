@@ -103,7 +103,8 @@ function App() {
     setCheckRegister(false);
     setSelectedCard({ name: "", link: "" });
   }
-
+  React.useEffect(() => {
+    handleCardLike()}, [setCards]);
   function handleCardLike(card) {
     // Снова проверяем, есть ли уже лайк на этой карточке
     const isLiked = card.likes.some((i) => i === currentUser._id);
@@ -112,7 +113,7 @@ function App() {
 
       api
         .deleteLike(card._id)
-        .then((newCard) =>
+        .then((newCard) =>   
           setCards((state) =>
             state.map((item) => (item === card._id ? newCard : item))
           )
