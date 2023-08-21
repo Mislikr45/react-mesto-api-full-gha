@@ -61,7 +61,7 @@ function App() {
 
   React.useEffect(() => {
     loggedIn && Promise.all([api.getUserInfo(), api.getCardInfo()])
-    .then(([userProfile, cards]) => {
+    .then(([userProfile, cards]) => { console.log(userProfile, cards)
       setCurrentUser(userProfile);
       setCards(cards);
     })
