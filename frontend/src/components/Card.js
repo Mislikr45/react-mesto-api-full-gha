@@ -26,7 +26,7 @@ function Card({
   function handleClick() {
     setIsActive(isLiked);
     onCardClick(card);
-    console.log(cardLikeButtonClassName);
+    console.log(setIsActive);
   }
   function handleLikeClick() {
     onCardLike(card);
