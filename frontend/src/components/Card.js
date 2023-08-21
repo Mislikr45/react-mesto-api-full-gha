@@ -19,9 +19,9 @@ function Card({
   
   
   console.log(isLiked, currentUser._id)
-
+  let pp=isLiked;
   const cardLikeButtonClassName = `${
-    isLiked ? "card-item__like card-item__like_selected" : 'card-item__like'
+    pp ? "card-item__like card-item__like_selected" : 'card-item__like'
   }`;
 
   function handleClick() {
@@ -29,7 +29,7 @@ function Card({
   }
   function handleLikeClick() {
     onCardLike(card);
-    setIsActive(!isActive)
+     pp=!isLiked;
    }
 
   function handleDeleteCard() {
