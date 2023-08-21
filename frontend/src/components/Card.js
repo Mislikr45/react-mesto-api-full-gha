@@ -32,6 +32,7 @@ function Card({
   }
   function handleLikeClick() {
     onCardLike(card);
+    setIsActive(!isActive)
    }
 
   function handleDeleteCard() {
