@@ -18,14 +18,22 @@ export default class Api {
   getUserInfo() {
     return fetch(`${this._baseUrl}/users/me`, {
       method: "GET",
-      headers: this._headers,
+      headers: {
+        Authorization : `Bearer ${localStorage.getItem("token")}`,
+        "Content-Type": "application/json",
+        'Accept': 'application/json',
+      }
     }).then(this._checkResponse);
   }
 
   getCardInfo() {
     return fetch(`${this._baseUrl}/cards`, {
       method: "GET",
-      headers: this._headers,
+      headers: {
+        Authorization : `Bearer ${localStorage.getItem("token")}`,
+        "Content-Type": "application/json",
+        'Accept': 'application/json',
+      }
     }).then(this._checkResponse);
   }
 
