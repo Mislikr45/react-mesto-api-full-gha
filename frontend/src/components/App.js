@@ -108,8 +108,7 @@ function App() {
   function handleCardLike(card) {
     // Снова проверяем, есть ли уже лайк на этой карточке
     const isLiked = card.likes.some((i) => i === currentUser._id);
-    console.log( isLiked, currentUser._id);
-    if (!isLiked) { console.log("del", isLiked, currentUser._id);
+    if (!isLiked) { console.log("del", isLiked);
       api
         .deletleLike(card._id)
         .then((newCard) =>   
@@ -118,7 +117,7 @@ function App() {
           )
         )
         .catch((error) => console.log(`Ошибка: ${error}`))
-    } 
+    } console.log("add", isLiked);
       api
         .toggleLike(card._id)
         .then((newCard) =>
