@@ -9,7 +9,7 @@ function Card({
   onCardLike,
   onCardDelete,
 }) {
-  const [isActive, setIsActive] = React.useState(isLiked);
+  const [isActive, setIsActive] = React.useState(false);
 
    
   const isOwn = card.owner === currentUser._id;
