@@ -44,7 +44,7 @@ function App() {
 
 
   React.useEffect(() => {
-    handleTokenCheck()}, [navigate]);
+    handleTokenCheck()}, []);
 
   const handleTokenCheck = () => {
     if (localStorage.getItem("jwt")) {
