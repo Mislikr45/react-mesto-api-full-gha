@@ -45,7 +45,7 @@ function Card({
             aria-label="Лайк"
             onClick={handleLikeClick}
           ></button>
-          <p className="card-item__like-amount">{2}</p>
+          <p className="card-item__like-amount">{"2"}</p>
         </div>
       </div>
     </div>
